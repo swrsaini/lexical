@@ -105,8 +105,8 @@ const theme: EditorThemeClasses = {
   tableCellActionButtonContainer:
     'PlaygroundEditorTheme__tableCellActionButtonContainer',
   tableCellHeader: 'PlaygroundEditorTheme__tableCellHeader',
-  tableCellHeaderCol: 'PlaygroundEditorTheme__tableCellHeaderRow',
-  tableCellHeaderRow: 'PlaygroundEditorTheme__tableCellHeaderCol',
+  tableCellHeaderCol: 'PlaygroundEditorTheme__tableCellHeaderCol',
+  tableCellHeaderRow: 'PlaygroundEditorTheme__tableCellHeaderRow',
   tableCellResizer: 'PlaygroundEditorTheme__tableCellResizer',
   tableCellSelected: 'PlaygroundEditorTheme__tableCellSelected',
   tableFrozenColumn: 'PlaygroundEditorTheme__tableFrozenColumn',
