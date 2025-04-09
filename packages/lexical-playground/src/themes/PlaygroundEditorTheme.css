@@ -309,6 +309,12 @@
   background-color: #f2f3f5;
   text-align: start;
 }
+.PlaygroundEditorTheme__tableCellHeaderRow {
+  border-bottom-width: 3px;
+}
+.PlaygroundEditorTheme__tableCellHeaderCol {
+  border-right-width: 3px;
+}
 .PlaygroundEditorTheme__tableCellSelected {
   caret-color: transparent;
 }
