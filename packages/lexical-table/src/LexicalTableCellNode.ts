@@ -158,6 +158,8 @@ export class TableCellNode extends ElementNode {
       element,
       config.theme.tableCell,
       this.hasHeader() && config.theme.tableCellHeader,
+      this.isHeaderRow() && config.theme.tableCellHeaderRow,
+      this.isHeaderCol() && config.theme.tableCellHeaderCol,
     );
 
     return element;
@@ -290,6 +292,20 @@ export class TableCellNode extends ElementNode {
 
   hasHeader(): boolean {
     return this.getLatest().__headerState !== TableCellHeaderStates.NO_STATUS;
+  }
+
+  isHeaderRow(): boolean {
+    return (
+      this.getLatest().__headerState === TableCellHeaderStates.ROW ||
+      this.getLatest().__headerState === TableCellHeaderStates.BOTH
+    );
+  }
+
+  isHeaderCol(): boolean {
+    return (
+      this.getLatest().__headerState === TableCellHeaderStates.COLUMN ||
+      this.getLatest().__headerState === TableCellHeaderStates.BOTH
+    );
   }
 
   updateDOM(prevNode: this): boolean {

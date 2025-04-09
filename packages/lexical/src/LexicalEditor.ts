@@ -149,6 +149,8 @@ export type EditorThemeClasses = {
   tableCellSelected?: EditorThemeClassName;
   tableCell?: EditorThemeClassName;
   tableCellHeader?: EditorThemeClassName;
+  tableCellHeaderRow?: EditorThemeClassName;
+  tableCellHeaderCol?: EditorThemeClassName;
   tableCellResizer?: EditorThemeClassName;
   tableRow?: EditorThemeClassName;
   tableScrollableWrapper?: EditorThemeClassName;
