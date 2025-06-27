@@ -203,7 +203,7 @@ const UNORDERED_LIST_REGEX = /^(\s*)[-*+]\s/;
 const CHECK_LIST_REGEX = /^(\s*)(?:-\s)?\s?(\[(\s|x)?\])\s/i;
 const HEADING_REGEX = /^(#{1,6})\s/;
 const QUOTE_REGEX = /^>\s/;
-const CODE_START_REGEX = /^[ \t]*```(\w+)?/;
+const CODE_START_REGEX = /^[ \t]*```([\w-]+)?/;
 const CODE_END_REGEX = /[ \t]*```$/;
 const CODE_SINGLE_LINE_REGEX =
   /^[ \t]*```[^`]+(?:(?:`{1,2}|`{4,})[^`]+)*```(?:[^`]|$)/;
@@ -213,11 +213,13 @@ const TABLE_ROW_DIVIDER_REG_EXP = /^(\| ?:?-*:? ?)+\|\s?$/;
 const createBlockNode = (
   createNode: (match: Array<string>) => ElementNode,
 ): ElementTransformer['replace'] => {
-  return (parentNode, children, match) => {
+  return (parentNode, children, match, isImport) => {
     const node = createNode(match);
     node.append(...children);
     parentNode.replace(node);
-    node.select(0, 0);
+    if (!isImport) {
+      node.select(0, 0);
+    }
   };
 };
 
@@ -243,7 +245,7 @@ function getIndent(whitespaces: string): number {
 }
 
 const listReplace = (listType: ListType): ElementTransformer['replace'] => {
-  return (parentNode, children, match) => {
+  return (parentNode, children, match, isImport) => {
     const previousNode = parentNode.getPreviousSibling();
     const nextNode = parentNode.getNextSibling();
     const listItem = $createListItemNode(
@@ -273,7 +275,9 @@ const listReplace = (listType: ListType): ElementTransformer['replace'] => {
       parentNode.replace(list);
     }
     listItem.append(...children);
-    listItem.select(0, 0);
+    if (!isImport) {
+      listItem.select(0, 0);
+    }
     const indent = getIndent(match[1]);
     if (indent) {
       listItem.setIndent(indent);
@@ -354,7 +358,6 @@ export const QUOTE: ElementTransformer = {
           $createLineBreakNode(),
           ...children,
         ]);
-        previousNode.select(0, 0);
         parentNode.remove();
         return;
       }
@@ -363,7 +366,9 @@ export const QUOTE: ElementTransformer = {
     const node = $createQuoteNode();
     node.append(...children);
     parentNode.replace(node);
-    node.select(0, 0);
+    if (!isImport) {
+      node.select(0, 0);
+    }
   },
   type: 'element',
 };
